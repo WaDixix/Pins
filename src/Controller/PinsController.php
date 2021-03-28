@@ -18,18 +18,7 @@ class PinsController extends AbstractController
         return $this->render('pins/index.html.twig', ['pins' => $pins]);
     }
 
-    public function show(int $id, PinRepository $repo): Response
-    {
-        $pin = $repo->find($id);
-
-        if (! $pin) {
-           throw $this->createNotFoundException("Pin #". $id ." Not Found!");
-        }
-
-        return $this->render("pins/show.html.twig", ['pin' => $pin]);
-    }
-
-    public function form(Request $request, EntityManagerInterface $em): Response
+    public function create(Request $request, EntityManagerInterface $em): Response
     {
         $pin = new Pin;
         $form = $this->createFormBuilder($pin)
@@ -52,6 +41,42 @@ class PinsController extends AbstractController
         return $this->render('pins/create.html.twig', [
             'monFormulaire' => $form->createView(),
         ]);
+    }
+
+    public function show(int $id, PinRepository $repo): Response
+    {
+        $pin = $repo->find($id);
+
+        if (! $pin) {
+           throw $this->createNotFoundException("Pin #". $id ." Not Found!");
+        }
+
+        return $this->render("pins/show.html.twig", ['pin' => $pin]);
+    }
+
+    public function edit(int $id, PinRepository $repo, Request $request, EntityManagerInterface $em): Response
+    {
+        $pin = $repo->find($id);
+
+        if (! $pin) {
+           throw $this->createNotFoundException("Pin #". $id ." Not Found!");
+        }
+
+        $form = $this->createFormBuilder($pin)
+            ->add("title", null, ['attr' => ['autofocus' => true]])
+            ->add("description", null, ['attr' => ['rows' => 10, 'cols' => 50]])
+            ->getForm()
+        ;
+
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->flush();
+
+            return $this->redirectToRoute('index');
+        }
+
+        return $this->render('pins/edit.html.twig', ['form' => $form->createView(), 'pin' => $pin]);
     }
 
     

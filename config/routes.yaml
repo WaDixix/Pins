@@ -10,5 +10,10 @@ show:
 
 create:
    path: /create
-   controller: App\Controller\PinsController::form
+   controller: App\Controller\PinsController::create
+   methods: GET|POST
+
+edit:
+   path: /edit/{id<[0-9]+>}
+   controller: App\Controller\PinsController::edit
    methods: GET|POST

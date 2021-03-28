@@ -11,4 +11,7 @@
 
 <p>{{ pin.description }}</p>
 
+<a href="{{ path('edit', {id: pin.id}) }}" class="btn btn-primary">Edit</a>
+<a href="{{ path('index') }}" class="btn btn-secondary">Back</a>
+
 {% endblock %}
