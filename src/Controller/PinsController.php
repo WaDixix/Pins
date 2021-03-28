@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Pin;
+use App\Form\PinType;
 use App\Repository\PinRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -21,11 +22,7 @@ class PinsController extends AbstractController
     public function create(Request $request, EntityManagerInterface $em): Response
     {
         $pin = new Pin;
-        $form = $this->createFormBuilder($pin)
-            ->add("title", null, ['attr' => ['autofocus' => true]])
-            ->add("description", null, ['attr' => ['rows' => 10, 'cols' => 50]])
-            ->getForm()
-        ;
+        $form = $this->createForm(PinType::class, $pin);
 
         $form->handleRequest($request);
 
@@ -62,11 +59,9 @@ class PinsController extends AbstractController
            throw $this->createNotFoundException("Pin #". $id ." Not Found!");
         }
 
-        $form = $this->createFormBuilder($pin)
-            ->add("title", null, ['attr' => ['autofocus' => true]])
-            ->add("description", null, ['attr' => ['rows' => 10, 'cols' => 50]])
-            ->getForm()
-        ;
+        $form = $this->createForm(PinType::class, $pin, [
+            'method' => 'PUT'
+        ]);
 
         $form->handleRequest($request);
 

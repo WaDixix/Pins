@@ -16,4 +16,4 @@ create:
 edit:
    path: /edit/{id<[0-9]+>}
    controller: App\Controller\PinsController::edit
-   methods: GET|POST
+   methods: GET|PUT
