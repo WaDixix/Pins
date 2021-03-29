@@ -9,10 +9,11 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PinsController extends AbstractController
 {
-    public function index(PinRepository $repo): Response
+    public function index(TranslatorInterface $translator, PinRepository $repo): Response
     {
         $pins = $repo->findBy([], ['createdAt' => 'DESC']);
 
@@ -29,6 +30,8 @@ class PinsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->persist($pin);
             $em->flush();
+
+            $this->addFlash('success', 'Pin successfully created!');
 
             return $this->redirectToRoute('index');
         }
@@ -68,6 +71,8 @@ class PinsController extends AbstractController
         if ($form->isSubmitted() && $form->isValid()) {
             $em->flush();
 
+            $this->addFlash('success', 'Pin successfully updated!');
+
             return $this->redirectToRoute('index');
         }
 
@@ -81,6 +86,8 @@ class PinsController extends AbstractController
         if ($this->isCsrfTokenValid('__pin_deletion', $request->request->get('_token'))) {
             $em->remove($pin);
             $em->flush();
+
+            $this->addFlash('info', 'Pin successfully deleted!');
         }
         
         return $this->redirectToRoute('index');

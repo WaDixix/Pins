@@ -29,6 +29,15 @@
     </nav>
 
     <main class="container mt-5 pt-5">
+
+        {% for type, messages in app.flashes %}
+            {% for message in messages %}
+            <div class="alert alert-{{ type }}">
+                {{ message }}
+            </div>
+            {% endfor %}
+        {% endfor %}
+
         {% block body %}{% endblock %}
     </main>
 
