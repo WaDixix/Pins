@@ -36,7 +36,7 @@ class PinsController extends AbstractController
         //dd($form);
 
         return $this->render('pins/create.html.twig', [
-            'monFormulaire' => $form->createView(),
+            'form' => $form->createView(),
         ]);
     }
 
