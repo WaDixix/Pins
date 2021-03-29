@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="{{ app.request.locale }}">
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -7,17 +7,8 @@
     <meta name="author" content="Romain Gauvin" />
     <title>Pinterest · {% block title %}Home{% endblock %}</title>
 
-    <!-- Font Family -->
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat&display=swap" rel="stylesheet">
-
     <!-- Bootstrap core CSS -->
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-
-    <style>
-        html, body {
-            font-family: 'Montserrat', sans-serif;
-        }
-    </style>
+    {{ encore_entry_link_tags('app') }}
 
 </head>
 <body>
@@ -65,7 +56,8 @@
         </p>
     </footer>
 
-   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    {{ encore_entry_script_tags('app') }}
+
 </body>
 </html>
 
