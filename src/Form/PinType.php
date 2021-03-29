@@ -13,7 +13,7 @@ class PinType extends AbstractType
     {
         $builder
             ->add('title', null, ['attr' => ['autofocus' => true]])
-            ->add('description', null, ['attr' => ['rows' => 10, 'cols' => 50]])
+            ->add('description')
         ;
     }
 
