@@ -10,7 +10,8 @@
             <h4>{{ pin.title }}</h4>
         </div>
         <div class="card-body">
-            <p>{{ pin.description }}</p>
+            <p>{{ pin.description|slice(0,10) }}</p>
+            <p>Submitted {{ pin.createdAt|ago }}</p>
             <a href="{{ path('show', {'id': pin.id}) }}" class="btn btn-primary">Voir</a>
         </div>
     </div>
