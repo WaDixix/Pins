@@ -9,11 +9,10 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
-use Symfony\Contracts\Translation\TranslatorInterface;
 
 class PinsController extends AbstractController
 {
-    public function index(TranslatorInterface $translator, PinRepository $repo): Response
+    public function index(PinRepository $repo): Response
     {
         $pins = $repo->findBy([], ['createdAt' => 'DESC']);
 
