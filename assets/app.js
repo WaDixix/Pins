@@ -9,8 +9,8 @@
 import './styles/app.scss';
 
 // start the Stimulus application
-const $ = require('jquery');
-require('bootstrap');
+import $ from 'jquery';
+import 'bootstrap';
 
 $('.custom-file-input').on('change', function(e){
     var inputFile = e.currentTarget;
