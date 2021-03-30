@@ -3,17 +3,34 @@
 {% block title 'Show Pin' %}
 
 {% block body %}
-<h1>Show Pin</h1>
+<div class="row pt-3">
+    <div class="col-md-6 mx-auto">
+        <article class="pin bg-white rounded shadow">
+            <div class="mw-100 overflow-hidden">
+                <a href="{{ path('show', {'id': pin.id}) }}">
+                    <img class="w-100 rounded-top" src="{{ (pin.imageName ? vich_uploader_asset(pin) : asset('build/images/default.jpg')) | imagine_filter('squared_thumbnail_medium') }}" alt="{{ pin.title }}">
+                </a>
+            </div>
+            <h2 class="h5 pl-3 pt-3"><a class="text-muted text-secondary text-decoration-none" href="{{ path('show', {'id': pin.id}) }}">{{ pin.title }}</a></h2>
+            <p class="pl-3 text-muted">
+                <small>
+                    Submitted 
+                    <time datetime="{{ pin.createdAt|date('Y-m-d H:i:s') }}">{{ pin.createdAt|ago }}</time> by WaDixix
+                </small>
+            </p>
 
-<hr>
+            <p class="pl-3 pb-3">{{ pin.description }}</p>
 
-<h4>{{ pin.title }}</h4>
+            <hr>
 
-<p>{{ pin.description }}</p>
+            <div class="pl-3 pb-3">
+                <a href="{{ path('edit', {id: pin.id}) }}" class="btn btn-light">Edit</a>
+                <a href="#" onclick="event.preventDefault(); confirm('You are sure?') && document.getElementById('js-pin-delete-form').submit()" class="btn btn-light">Delete</a>
+            </div>
+        </article>
 
-<a href="{{ path('edit', {id: pin.id}) }}" class="btn btn-primary">Edit</a>
-<a href="#" onclick="event.preventDefault(); confirm('You are sure?') && document.getElementById('js-pin-delete-form').submit()" class="btn btn-danger">Delete</a>
-<a href="{{ path('index') }}" class="btn btn-secondary">Go Back</a>
+    </div>
+</div>
 
 <form id="js-pin-delete-form" action="{{ path('delete', {id: pin.id}) }}" method="post" style="display:none">
     <input type="hidden" name="_token" value="{{ csrf_token('__pin_deletion') }}">
