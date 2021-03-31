@@ -166,6 +166,11 @@ class User implements UserInterface
         // $this->plainPassword = null;
     }
 
+    public function getFullName(): string
+    {
+        return $this->firstName . ' ' .  $this->lastName;
+    }
+
     /**
      * @return Collection|Pin[]
      */
