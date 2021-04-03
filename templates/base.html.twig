@@ -17,6 +17,7 @@
             <a class="navbar-brand" href="{{ path('index') }}">Pinterest</a>
             <div class="collapse navbar-collapse">
                 <ul class="navbar-nav ml-auto mb-2 mb-md-0">
+                    {% if app.user %}
                     <li class="nav-item">
                         <a class="nav-link" href="{{ path('index') }}">Home</a>
                     </li>
@@ -27,8 +28,16 @@
                         <a class="nav-link" href="#">Account</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Logout</a>
+                        <a class="nav-link" href="{{ path('app_logout') }}">Logout</a>
                     </li>
+                    {% else %}
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('app_login') }}">Login</a>
+                    </li>
+                    {% endif %}
                 </ul>
             </div>
         </div>
