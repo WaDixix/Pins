@@ -90,7 +90,5 @@ class PinsController extends AbstractController
         }
         
         return $this->redirectToRoute('index');
-    }
-
-    
+    }  
 }
